@@ -37,7 +37,11 @@ export default {
       return {
         recipes: []
       }
-    }
+    },
+
+      mounted() {
+    document.title = "Recettes"
+  }
 }
 </script>
 
