@@ -1,6 +1,8 @@
 <template>
 	<div class="single-recipe-card">
-		<a href="#"><div class="single-recipe-bg recipe-bg"></div></a>
+		<a href="#"><div class="single-recipe-bg recipe-bga"
+     v-bind:style="{ 'background-image': 'url(' + image + ')' }"
+    ></div></a>
 		<div class="recipe-text-box">
 			<h3><a href="#"> {{ recipeProps.title }} </a></h3>
 				<p class="blog-meta">
@@ -17,6 +19,20 @@
 
 export default {
     name: 'RecipeCard',
+
+     async created() {
+
+      if(this.recipeProps.pictures.length > 0 ) {
+       this.image = this.recipeProps.pictures[0].url
+      }
+    },
+
+
+    data() {
+      return {
+        image : ""
+      }
+    },
 
     props: {
         recipeProps: Object,
