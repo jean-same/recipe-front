@@ -3,6 +3,7 @@
        <BreadCrumb breadCrumbProps="Liste des recettes"/>
             <div class="latest-news mt-150 mb-150">
               <div class="container">
+                <RecipeTypeList /> 
                 <div class="row"> 
                   <div 
                     v-for="recipe in this.recipes.result" :key="recipe.id"
@@ -19,11 +20,13 @@
 import RecipeCard from './RecipeCard.vue'
 import BreadCrumb from './BreadCrumb.vue'
 import RecipeService from '../services/recipeService.js'
+import RecipeTypeList from './RecipeTypeList.vue'
 
 export default {
     name: "RecipeList",
       components: {
         BreadCrumb,
+        RecipeTypeList,
         RecipeCard
     },
 
