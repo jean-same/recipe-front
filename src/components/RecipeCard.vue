@@ -43,6 +43,7 @@ export default {
   box-shadow: 0 0 0;
   -webkit-box-shadow: none;
   box-shadow: none;
+  transform: skewY(1deg);
 }
 
 .single-recipe-card h3 {
@@ -100,6 +101,12 @@ p.blog-meta span i {
 
 .recipe-bg {
   background-image: url("https://baconmockup.com/350/350/");
+}
+
+.recipe-bg {
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
 }
 
 a.read-more-btn {

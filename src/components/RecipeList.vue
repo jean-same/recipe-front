@@ -1,6 +1,6 @@
 <template>
     <section>
-        <h1>Recettes</h1>
+       <BreadCrumb breadCrumbProps="Liste des recettes"/>
             <div class="latest-news mt-150 mb-150">
               <div class="container">
                 <div class="row"> 
@@ -17,12 +17,14 @@
 
 <script>
 import RecipeCard from './RecipeCard.vue'
+import BreadCrumb from './BreadCrumb.vue'
 import RecipeService from '../services/recipeService.js'
 
 export default {
     name: "RecipeList",
       components: {
-    RecipeCard
+        BreadCrumb,
+        RecipeCard
     },
 
     async created() {
