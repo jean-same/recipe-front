@@ -14,15 +14,28 @@
 
 						<!-- menu start -->
 						<nav class="main-menu">
+              
 							<ul>
-								<li class="current-list-item"><a href="#">Accueil</a></li>
-                                <li><a href="#">Mes recettes</a></li>
-								<li><a href="#">A propos de nous</a></li>
-								<li><a href="#">Contact</a></li>
+                
+								<li>
+                  <router-link to="/">Accueil</router-link>
+                </li>
+                <li class="">
+                  <router-link to="/recettes">Recettes</router-link>
+                </li>
+                <li>
+                  <router-link to="/mes-recettes">Mes recettes</router-link>
+                </li>
+								<li>
+                  <router-link to="/about-us">A propos de nous</router-link>
+                </li>
+								<li>
+                  <router-link to="/mes-recettes">Contact</router-link>
+                </li>
 								<li><a href="#">Auth</a>
 									<ul class="sub-menu">
-										<li><a href="#">Connexion</a></li>
-										<li><a href="#">Inscription</a></li>
+										<router-link to="/recettes">Connexion</router-link>
+										<router-link to="/recettes">Inscription</router-link>
 									</ul>
 								</li>
 							</ul>
@@ -216,7 +229,7 @@ nav.main-menu ul ul.sub-menu li a {
   font-weight: 600;
 }
 
-nav.main-menu ul li.current-list-item > a {
+nav.main-menu .router-link-exact-active  {
   color: #F28123;
 }
 
