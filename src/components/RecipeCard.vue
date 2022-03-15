@@ -2,9 +2,15 @@
 	<div class="single-recipe-card">
 		<a href="#"><div class="single-recipe-bg recipe-bga"
      v-bind:style="{ 'background-image': 'url(' + getPicture + ')' }"
-        > <button type="button" class="btn btn-dark" >
+        > 
+        <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-dark " >
             Ingredient<span v-if="recipeProps.ingredients.length > 1">s</span> <span class="badge bg-secondary"> {{ recipeProps.ingredients.length }} </span>
         </button> 
+                <button type="button" class="btn btn-warning " >
+            {{ recipeProps.difficulty.name }}
+        </button> 
+        </div>
     </div></a>
 		<div class="recipe-text-box">
 			<h3><a href="#"> {{ recipeProps.title }} </a></h3>
@@ -15,10 +21,21 @@
 				<p class="excerpt"> {{ recipeProps.content }} </p>
 				<a href="#" class="read-more-btn">Voir plus <b-icon icon="bullseye"></b-icon>  </a>
 		</div>
+
+    <div class="d-flex justify-content-around bd-highlight mb-3 py-2 like-comment-share">
+      <LikeButton /> 
+      <CommentButton /> 
+      <ShareButton /> 
+    </div>
+    
 	</div>
 </template>
 
 <script>
+
+import LikeButton from './secondaries/LikeButton.vue';
+import CommentButton from './secondaries/CommentButton.vue';
+import ShareButton from './secondaries/ShareButton.vue';
 
 export default {
     name: 'RecipeCard',
@@ -27,6 +44,12 @@ export default {
         getPicture() {
           return this.recipeProps.pictures[0].url
         }
+    },
+
+    components: {
+        LikeButton,
+        CommentButton,
+        ShareButton
     },
 
     props: {
@@ -75,7 +98,7 @@ export default {
   padding: 10px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  height: 300px;
+  height: 270px;
 }
 
 .single-recipe-bg  {
@@ -132,6 +155,16 @@ a.read-more-btn {
 
 a.read-more-btn:hover {
   color: #F28123;
+}
+
+.like-comment-share .default {
+    border: none;
+    padding: 0.3rem;
+    border-radius: 20px;
+    width: 70px;
+    transition: all ease 0.3s;
+    font-weight: bold;
+    font-size: 1.1rem;
 }
 
 </style>
