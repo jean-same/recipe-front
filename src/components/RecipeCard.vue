@@ -16,7 +16,7 @@
 			<h3><a href="#"> {{ recipeProps.title }} </a></h3>
 				<p class="blog-meta">
 					<span class="author"> <b-icon icon="person-fill"></b-icon> {{ recipeProps.user.pseudo }} </span>
-					<span class="date"> <b-icon icon="calendar2-check"></b-icon>  13 Mar, 2022</span>
+					<span class="date"> <b-icon icon="calendar2-check"></b-icon>  {{ date }}  </span>
 				</p>
 				<p class="excerpt"> {{ recipeProps.content }} </p>
 				<a href="#" class="read-more-btn">Voir plus <b-icon icon="bullseye"></b-icon>  </a>
@@ -36,6 +36,7 @@
 import LikeButton from './secondaries/LikeButton.vue';
 import CommentButton from './secondaries/CommentButton.vue';
 import ShareButton from './secondaries/ShareButton.vue';
+import utils from '../services/utils';
 
 export default {
     name: 'RecipeCard',
@@ -44,6 +45,12 @@ export default {
         getPicture() {
           return this.recipeProps.pictures[0].url
         }
+    },
+
+    data() {
+      return {
+        date: utils.formatDate(this.recipeProps.created_at)
+      }
     },
 
     components: {
