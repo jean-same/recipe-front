@@ -2,7 +2,7 @@
     <div class="p-2">
           <button class="default comment-btn animated">
             <span class="comment-icon"> <b-icon icon="chat-fill"></b-icon> </span>
-            <span>99</span>
+            <span> {{ nbComments }} </span>
             </button>
     </div>
 </template>
@@ -11,6 +11,10 @@
 
 export default {
     name: 'CommentButton',
+
+        props: {
+        nbComments: Number,
+    }
 }
 </script>
 

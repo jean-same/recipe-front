@@ -2,7 +2,7 @@
     <div class="p-2">
           <button class="default like-btn animated">
             <span class="like-icon"> <b-icon icon="heart"></b-icon> </span>
-            <span >99</span>
+            <span > {{ nbLikes }} </span>
         </button>
     </div>
 </template>
@@ -11,6 +11,10 @@
 
 export default {
     name: 'LikeButton',
+
+    props: {
+        nbLikes: Number,
+    }
 }
 </script>
 

@@ -23,8 +23,8 @@
 		</div>
 
     <div class="d-flex justify-content-around bd-highlight mb-3 py-2 like-comment-share">
-      <LikeButton /> 
-      <CommentButton /> 
+      <LikeButton :nbLikes="recipeProps.likes" /> 
+      <CommentButton :nbComments="recipeProps.comments.length" /> 
       <ShareButton /> 
     </div>
     
