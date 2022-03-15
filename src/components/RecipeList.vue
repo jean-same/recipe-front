@@ -3,10 +3,12 @@
        <BreadCrumb breadCrumbProps="Liste des recettes"/>
             <div class="latest-news mt-150 mb-150">
               <div class="container">
-                <RecipeTypeList /> 
+                <RecipeTypeList 
+                  v-on:recipe-typeId-selected="handleRecipeTypeSelected"
+                /> 
                 <div class="row"> 
                   <div 
-                    v-for="recipe in this.recipes.result" :key="recipe.id"
+                    v-for="recipe in this.recipes" :key="recipe.id"
                     class="col-lg-4 col-md-6">
                   <RecipeCard :recipeProps="recipe" /> 
                   </div>
@@ -21,6 +23,7 @@ import RecipeCard from './RecipeCard.vue'
 import BreadCrumb from './BreadCrumb.vue'
 import RecipeService from '../services/recipeService.js'
 import RecipeTypeList from './RecipeTypeList.vue'
+import recipeService from '../services/recipeService.js'
 
 export default {
     name: "RecipeList",
@@ -31,9 +34,7 @@ export default {
     },
 
     async created() {
-      console.log('Le composant vient d"etre cree')
       this.recipes = await RecipeService.loadRecipes()
-      console.log(this.recipes)
     },
 
     data() {
@@ -42,9 +43,15 @@ export default {
       }
     },
 
-      mounted() {
-    document.title = "Recettes"
-  }
+    methods: {
+        handleRecipeTypeSelected: async function(selectedOptionId) {
+            this.recipes = await recipeService.loadRecipesByType(selectedOptionId);
+        }
+    },
+
+    mounted() {
+      document.title = "Recettes"
+    }
 }
 </script>
 

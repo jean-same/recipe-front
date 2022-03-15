@@ -1,17 +1,14 @@
 <template>
      <div>
-         <form action=""
-            @change="handleClick"
-          >
             <div class="radio-group">
                 <span
-                 v-for="type in this.types.result" :key="type.id"
+                 v-for="type in this.types.result" 
+                 :key="type.id" 
                 >
-                <input type="radio" v-bind:id="`option${type.id}`" name="selector">
+                <input type="radio" v-bind:id="`option${type.id}`" v-model="selectedOption" :value="type.id" name="selector" v-on:change="handleSelectedType">
                 <label v-bind:for="`option${type.id}`">{{ type.name }}</label>
                 </span>
             </div>
-        </form>
      </div>
      
 </template>
@@ -24,22 +21,19 @@ export default {
 
     async created() {
       this.types = await typeService.loadTypes()
-      console.log(this.types)
     },
-
-
 
     data() {
       return {
         types: [],
+        selectedOption: null
       }
     },
 
     methods: {
-        handleClick: function(evt) {
+        handleSelectedType: function(evt) {
             evt.PreventDefault;
-            console.log(evt.currentTarget)
-            //alert("test")
+            this.$emit('recipe-typeId-selected' , this.selectedOption)
         }
     }
 }

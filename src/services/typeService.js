@@ -6,7 +6,6 @@ const typeService = {
 
     async loadTypes() {
         const response = await axios.get(typeService.baseUri + '/type' )
-        console.log(response.data.result);
 
         return response.data;
     }

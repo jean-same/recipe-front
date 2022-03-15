@@ -6,9 +6,14 @@ const recipeService = {
 
     async loadRecipes() {
         const response = await axios.get(recipeService.baseUri + '/recipe' )
-        console.log(response.data.result);
 
-        return response.data;
+        return response.data.result;
+    },
+
+    async loadRecipesByType(typeId) {
+        const response = await axios.get(recipeService.baseUri + '/type/' + typeId )
+
+        return response.data.result.recipes;
     }
 
 }
