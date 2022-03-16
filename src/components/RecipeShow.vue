@@ -57,7 +57,14 @@
                                     ><a > {{ ingredient.name }} </a></li>
                                 </ul>
                             </div>
-
+                            <div class="recent-posts">
+                                <h4>Nos derniers recettes</h4>
+                               <MostRecentRecipe />
+                            </div>
+                            <div class="archive-posts">
+                                <h4>Les plus aimées</h4>
+                                <MostLikedRecipe />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -68,6 +75,10 @@
 
 <script>
 import BreadCrumb from './BreadCrumb.vue'
+import MostLikedRecipe from './MostLikedRecipe.vue'
+import MostRecentRecipe from './MostRecentRecipe.vue'
+
+
 import utils from '../services/utils';
 import recipeService from '../services/recipeService'
 
@@ -75,7 +86,9 @@ export default {
     name: 'RecipeShow',
 
     components: {
-        BreadCrumb
+        BreadCrumb,
+        MostLikedRecipe,
+        MostRecentRecipe
     },
 
     data(){
@@ -109,7 +122,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 
 
 .single-recipe-bg {
@@ -264,6 +277,20 @@ input[type="submit"] {
 
 .sidebar-section > div:last-child {
   margin-bottom: 0;
+}
+
+.recent-posts ul li, .archive-posts ul li {
+  position: relative;
+  padding-left: 17px;
+  margin-bottom: 10px;
+}
+
+.recent-posts ul li:before, .archive-posts ul li:before {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  content: "-";
+  font-weight: 900;
 }
 
 .ingredients-section ul li {

@@ -20,7 +20,13 @@ const recipeService = {
         const response = await axios.get(recipeService.baseUri + '/type/' + typeId )
 
         return response.data.result.recipes;
-    }
+    },
+
+    async loadFiveSpecificRecipes(arg) {
+        const response = await axios.get(recipeService.baseUri + '/recipe/spec?q=' + arg )
+
+        return response.data.result;
+    },
 
 }
 
