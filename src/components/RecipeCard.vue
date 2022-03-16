@@ -19,7 +19,10 @@
 					<span class="date"> <b-icon icon="calendar2-check"></b-icon>  {{ date }}  </span>
 				</p>
 				<p class="excerpt"> {{ recipeProps.content }} </p>
-				<a href="#" class="read-more-btn">Voir plus <b-icon icon="bullseye"></b-icon>  </a>
+				<span class="read-more-btn"> 
+          <router-link :to="{ name: 'recipeShow', params: { id: recipeProps.id }}"> Voir plus </router-link>
+        <b-icon icon="bullseye"></b-icon>
+        </span>
 		</div>
 
     <div class="d-flex justify-content-around bd-highlight mb-3 py-2 like-comment-share">
