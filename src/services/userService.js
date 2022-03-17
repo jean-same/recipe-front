@@ -1,4 +1,5 @@
 import axios from "axios";
+import storage from "@/plugins/storage";
 
 const userService = {
 
@@ -25,6 +26,10 @@ const userService = {
     setHeaders: (token) => {
         axios.defaults.headers.common['Authorization'] = "Bearer " + token
     },
+
+    logout: function(){
+        storage.unset('userData');
+    }
 
 }
 

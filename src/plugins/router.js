@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RecipeView from '../views/RecipeView.vue'
+import LogoutView from '../views/LogoutView.vue'
 
 import RecipeShow from '../components/RecipeShow.vue'
 
@@ -32,6 +33,12 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginView
+  },
+
+  {
+    path: '/logout',
+    component: LogoutView,
+    name: 'logout'
   },
 
   {
