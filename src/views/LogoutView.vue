@@ -13,6 +13,7 @@ export default {
   name: 'LogoutView',
   created(){
       userService.logout()
+      this.$router.push('login')
   }
 }
 </script>

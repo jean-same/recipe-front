@@ -33,7 +33,8 @@
                   <router-link to="/mes-recettes">Contact</router-link>
                 </li>
 								<li>
-										<router-link to="/login">Connexion</router-link>
+										<span><router-link to="/logout">Deconnexion</router-link></span>
+                    <span><router-link to="/login">Connexion </router-link></span>
 								</li>
 							</ul>
 						</nav>
@@ -51,7 +52,7 @@
 <script>
 
 export default {
-    name: "MyHeader"
+    name: "MyHeader",
 }
 </script>
 
