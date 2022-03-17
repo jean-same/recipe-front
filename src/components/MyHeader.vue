@@ -32,11 +32,8 @@
 								<li>
                   <router-link to="/mes-recettes">Contact</router-link>
                 </li>
-								<li><a href="#">Auth</a>
-									<ul class="sub-menu">
-										<router-link to="/recettes">Connexion</router-link>
-										<router-link to="/recettes">Inscription</router-link>
-									</ul>
+								<li>
+										<router-link to="/login">Connexion</router-link>
 								</li>
 							</ul>
 						</nav>
@@ -108,9 +105,9 @@ nav.main-menu ul > li {
 
 nav.main-menu ul ul.sub-menu {
   position: absolute;
-  background-color: #fff;
-  width: 90px;
-  padding: 5px 5px;
+  background-color: rgba(0, 0, 0, 0.377);
+  width: 110px;
+  padding: 5px 0;
   margin: 0;
   left: 0;
   top: 50px;
