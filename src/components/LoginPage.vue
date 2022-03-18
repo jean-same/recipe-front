@@ -7,21 +7,28 @@
                         <div class="login-form-container col-lg-6 mb-3 mb-lg-0">
                             <div id="form_status">
                                 <span class="wrong"
-                                v-if="fieldsEmpty"
-                                >Les 2 champs sont obligatoires! </span>
-                                <span class="wrong"
-                                v-if="loginFailed"
+                                v-if="message"
                                 >Identifiants incorects! </span>
                             </div>
                             <div class="login-form">
-                                <form @submit="handleSubmit">
+                                <form @submit.prevent="handleLogin">
                                     <p>
-                                        <input type="email" v-model="email" placeholder="Votre adresse email" name="email" id="email">
+                                        <input type="email" v-model="user.email" v-validate="'required'" placeholder="Votre adresse email" name="email" id="email">
                                     </p>
+                                    <div
+                                        v-if="errors.has('email')"
+                                        class="empty-field"
+                                        role="alert"
+                                    >Email obligatoire!</div>
                                     <p>
-                                        <input type="password" v-model="password" placeholder="Votre mot de passe" name="password" id="password">
+                                        <input type="password" v-model="user.password" v-validate="'required'" placeholder="Votre mot de passe" name="password" id="password">
                                     </p>
-                                    <p><input type="submit" value="Connexion"></p>
+                                    <div
+                                        v-if="errors.has('password')"
+                                        class="empty-field"
+                                        role="alert"
+                                    >Mot de passe obligatoire!</div>
+                                    <p><input :class="{ 'submit-disabled' : errors.has('email') || errors.has('password') }" type="submit" value="Connexion"></p>
                                 </form>
                             </div>
                         </div>
@@ -33,57 +40,64 @@
 
 <script>
 
+
+import User from '../models/user';
 import BreadCrumb from './BreadCrumb.vue'
-import storage from "@/plugins/storage";
-import userService from '../services/userService'
 
 export default {
-    name: 'LoginPage',
+  name: 'LoginPage',
 
     components: {
         BreadCrumb
     },
 
-    data() {
-      return {
-        email: '',
-        password: '',
-        fieldsEmpty: false,
-        emailEmpty: false,
-        passwordEmpty: false,
-        loginFailed: false
-      }
+  data() {
+    return {
+      user: new User('', ''),
+      loading: false,
+      message: ''
+    };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
     },
 
-    methods: {
-        async handleSubmit(evt) {
-            evt.preventDefault()
-
-            if(this.email == '' || this.password == '') {
-                this.fieldsEmpty = true
-            }
-
-            if( !this.fieldsEmpty ) {
-                const userData = await userService.login(this.email , this.password)
-                console.log(userData.data.token)
-                              
-              if(userData){
-                  this.fieldsEmpty = false
-                  storage.set('userData', userData.data);
-                  userService.setHeaders(userData.data.token)
-                  this.loginFailed = false;
-                  this.$router.push('recettes');
-              }
-              else {
-                  console.log('LOGIN FAILED');
-                  this.loginFailed = true;
-              }
-
-            }
-        }
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push('/recettes');
     }
 
-}
+  },
+  methods: {
+    handleLogin() {
+      this.loading = true;
+      this.$validator.validateAll().then(isValid => {
+          console.log(isValid)
+        if (!isValid) {
+          this.loading = false;
+          return;
+        }
+        if (this.user.email && this.user.password) {
+          this.$store.dispatch('auth/login', this.user).then(
+            () => {
+              this.$router.push('/recettes');
+            },
+            error => {
+              this.loading = false;
+              this.message = 'Identifiants incorrects'
+               /* (error.response && error.response.data) ||
+                error.message || */
+                error.toString(); 
+            }
+          );
+        }
+      });
+    }
+  }
+};
+
 </script>
 
 <style scoped lang="scss">
@@ -104,7 +118,12 @@ export default {
     border-radius: 10px;
 }
 
-#form_status span {
+.submit-disabled {
+    pointer-events: none;
+    background: #ccc;
+}
+
+#form_status span, .empty-field {
   color: #fff;
   font-size: 14px;
   font-weight: normal;

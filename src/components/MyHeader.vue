@@ -33,8 +33,8 @@
                   <router-link to="/mes-recettes">Contact</router-link>
                 </li>
 								<li>
-										<span><router-link to="/logout">Deconnexion</router-link></span>
-                    <span><router-link to="/login">Connexion </router-link></span>
+										<a class="nav-link" v-if="currentUser"  @click.prevent="logOut"> Deconnexion </a>
+                    <span v-if="!currentUser"><router-link to="/login">Connexion </router-link></span>
 								</li>
 							</ul>
 						</nav>
@@ -53,6 +53,19 @@
 
 export default {
     name: "MyHeader",
+
+    computed: {
+      currentUser() {
+        return this.$store.state.auth.user;
+      },
+    },
+
+    methods: {
+    logOut() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/login');
+    }
+  }
 }
 </script>
 

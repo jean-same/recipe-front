@@ -12,7 +12,6 @@
 <script>
 
 import MyHeader from './components/MyHeader.vue'
-//import RecipeList from './components/RecipeList.vue'
 import MyFooter from './components/MyFooter.vue'
 import userService from './services/userService';
 
