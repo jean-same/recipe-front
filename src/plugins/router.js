@@ -2,11 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
-import LoginView from '../views/LoginView.vue'
-import RecipeView from '../views/RecipeView.vue'
-import LogoutView from '../views/LogoutView.vue'
-
-import RecipeShow from '../components/RecipeShow.vue'
 
 Vue.use(VueRouter)
 
@@ -20,25 +15,25 @@ const routes = [
   {
     path: '/recettes',
     name: 'recipes',
-    component: RecipeView
+    component: () => import('../views/RecipeView.vue')
   },
 
   {
     path: '/recette/:id',
     name: 'recipeShow',
-    component: RecipeShow
+    component: () => import('../components/RecipeShow.vue')
   },
 
   {
     path: '/login',
     name: 'login',
-    component: LoginView
+    component: () => import('../views/LoginView.vue')
   },
 
   {
     path: '/logout',
-    component: LogoutView,
-    name: 'logout'
+    name: 'logout',
+    component: () => import('../views/LogoutView.vue')
   },
 
   {
@@ -56,5 +51,18 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  const publicPages = ['/login', '/home'];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('userData');
+  // trying to access a restricted page + not logged in
+  // redirect to login page
+  if (authRequired && !loggedIn) {
+    next('/login');
+  } else {
+    next();
+  }
+});
 
 export default router

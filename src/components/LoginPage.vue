@@ -136,4 +136,16 @@ export default {
   margin-bottom: 18px;
 }
 
+input[type="submit"] {
+    background-color: #F28123;
+    color: #051922;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 15px;
+    border: none !important;
+    cursor: pointer;
+    padding: 15px 25px;
+    border-radius: 3px;
+}
+
 </style>

@@ -12,6 +12,15 @@ class axiosDefault {
             axios.defaults.headers.common['Authorization'] = "Bearer " + userData.token;
         }
     }
+
+    setHeader(token) {
+        axios.defaults.headers.common['Authorization'] = "Bearer " + token;
+    }
+
+    deleteHeader() {
+        axios.defaults.headers.common['Authorization'] = ""
+    }
+    
 }
 
 export default new axiosDefault();

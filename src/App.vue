@@ -23,17 +23,15 @@ export default {
     MyFooter
   },
 
-  async created() {
-    axiosDefault.setDefault()
-
-    let checkExpiredToken = userService.isAuthenticated()
+  mounted() {
     
-    if(!checkExpiredToken) {
-      this.$router.push('/login');
-    }
-   /* if(this.$store.state.auth.user) {
-      userService.checkToken(this.$store.state.auth.user.token)
-    } */
+  },
+
+   created() {
+
+    userService.isAuthenticated()
+
+    axiosDefault.setDefault()
   },
 }
 </script>

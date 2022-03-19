@@ -13,6 +13,7 @@ const userService = {
           if (expiration * 1000 > new Date().getTime()) {
             return true;
           } else {
+            storage.unset('userData')
             return false;
           }
         }
