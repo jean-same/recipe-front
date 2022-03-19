@@ -15,12 +15,15 @@
 
 <script>
 import typeService from '../services/typeService'
+import userService from '../services/userService'
 
 export default {
     name: 'RecipeTypeList',
 
     async created() {
-      this.types = await typeService.loadTypes()
+      if(userService.isAuthenticated() ) {
+          this.types = await typeService.loadTypes()
+      }
     },
 
     data() {

@@ -14,7 +14,6 @@
 import MyHeader from './components/MyHeader.vue'
 import MyFooter from './components/MyFooter.vue'
 import axiosDefault from './services/axiosDefaultService'
-import userService from './services/userService'
 
 export default {
   name: 'App',
@@ -28,8 +27,6 @@ export default {
   },
 
    created() {
-
-    userService.isAuthenticated()
 
     axiosDefault.setDefault()
   },

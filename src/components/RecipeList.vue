@@ -24,6 +24,7 @@ import BreadCrumb from './BreadCrumb.vue'
 import RecipeService from '../services/recipeService.js'
 import RecipeTypeList from './RecipeTypeList.vue'
 import recipeService from '../services/recipeService.js'
+import userService from '../services/userService'
 
 export default {
     name: "RecipeList",
@@ -34,7 +35,12 @@ export default {
     },
 
     async created() {
-      this.recipes = await RecipeService.loadRecipes()
+      if(!userService.isAuthenticated() ) {
+          this.$store.dispatch('auth/logout');
+          this.$router.push('/login');
+      } else {
+        this.recipes = await RecipeService.loadRecipes()
+      }
     },
 
     data() {
@@ -44,9 +50,15 @@ export default {
     },
 
     methods: {
-        handleRecipeTypeSelected: async function(selectedOptionId) {
-            this.recipes = await recipeService.loadRecipesByType(selectedOptionId);
+      
+      handleRecipeTypeSelected: async function(selectedOptionId) {
+        if(!userService.isAuthenticated() ) {
+            this.$store.dispatch('auth/logout');
+            this.$router.push('/login');
+        } else {
+              this.recipes = await recipeService.loadRecipesByType(selectedOptionId);
         }
+      }
     },
 
     mounted() {
