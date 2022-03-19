@@ -13,7 +13,8 @@
 
 import MyHeader from './components/MyHeader.vue'
 import MyFooter from './components/MyFooter.vue'
-import userService from './services/userService';
+import axiosDefault from './services/axiosDefaultService'
+import userService from './services/userService'
 
 export default {
   name: 'App',
@@ -22,8 +23,17 @@ export default {
     MyFooter
   },
 
-  created() {
-      userService.checkToken();
+  async created() {
+    axiosDefault.setDefault()
+
+    let checkExpiredToken = userService.isAuthenticated()
+    
+    if(!checkExpiredToken) {
+      this.$router.push('/login');
+    }
+   /* if(this.$store.state.auth.user) {
+      userService.checkToken(this.$store.state.auth.user.token)
+    } */
   },
 }
 </script>

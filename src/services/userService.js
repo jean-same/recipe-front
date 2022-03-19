@@ -1,20 +1,15 @@
-import axios from "axios";
 import jwtDecode from "jwt-decode";
 import storage from "@/plugins/storage";
 
 const userService = {
 
-    userData: storage.get('userData'),
-
-    setHeaders: (token) => {
-        axios.defaults.headers.common['Authorization'] = "Bearer " + token
-    },
-
     isAuthenticated: () => {
       
-        if (userService.userData) {
-          const { exp: expiration } = jwtDecode(userService.userData.token);
-          console.log(expiration)
+        if (storage.get('userData')) {
+          const { exp: expiration } = jwtDecode(storage.get('userData').token);
+
+          console.log(expiration * 1000 - new Date().getTime())
+
           if (expiration * 1000 > new Date().getTime()) {
             return true;
           } else {
@@ -27,10 +22,10 @@ const userService = {
 
     checkToken: () => {
       
-        if (userService.userData) {
-            const { exp: expiration } = jwtDecode(userService.userData.token);
+        if (storage.get('userData')) {
+            const { exp: expiration } = jwtDecode(storage.get('userData').token);
           if (expiration * 1000 > new Date().getTime()) {
-            userService.setHeaders(userService.userData.token)
+            console.log("ok")
           }
         }
       },

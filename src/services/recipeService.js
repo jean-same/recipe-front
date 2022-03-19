@@ -2,28 +2,26 @@ import axios from "axios";
 
 const recipeService = {
 
-    baseUri: 'http://localhost:8000/api/v1',
-
     async loadRecipes() {
-        const response = await axios.get(recipeService.baseUri + '/recipe' )
+        const response = await axios.get('/recipe' )
 
         return response.data.result;
     },
 
     async loadOneRecipe(recipeId) {
-        const response = await axios.get(recipeService.baseUri + '/recipe/' + recipeId )
+        const response = await axios.get('/recipe/' + recipeId )
 
         return response.data.result;
     },
 
     async loadRecipesByType(typeId) {
-        const response = await axios.get(recipeService.baseUri + '/type/' + typeId )
+        const response = await axios.get('/type/' + typeId )
 
         return response.data.result.recipes;
     },
 
     async loadFiveSpecificRecipes(arg) {
-        const response = await axios.get(recipeService.baseUri + '/recipe/spec?q=' + arg )
+        const response = await axios.get('/recipe/spec?q=' + arg )
 
         return response.data.result;
     },

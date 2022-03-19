@@ -8,13 +8,14 @@ class AuthService {
         password: user.password
       })
       .then(response => {
-          console.log(response.data.token)
         if (response.data.token) {
-            console.log(response.data)
           window.localStorage.setItem('userData', JSON.stringify(response.data));
         }
         return response.data;
-      });
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
   logout() {
     localStorage.removeItem('userData');
