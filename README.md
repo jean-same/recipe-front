@@ -1,4 +1,4 @@
-# ocooking
+# recipe
 
 ## Project setup
 ```
