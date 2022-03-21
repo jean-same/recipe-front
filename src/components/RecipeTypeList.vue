@@ -21,13 +21,15 @@ export default {
     name: 'RecipeTypeList',
 
     async created() {
-      if(userService.isAuthenticated() ) {
-          this.types = await typeService.loadTypes()
+      this.preTypes = await typeService.loadTypes()
+      if(userService.isAuthenticated() || this.preTypes) {
+          this.types = this.preTypes.data
       }
     },
 
     data() {
       return {
+        preTypes: null,
         types: [],
         selectedOption: null
       }

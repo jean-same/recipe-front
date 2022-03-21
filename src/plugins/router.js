@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import axios from 'axios';
 import VueRouter from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
@@ -52,7 +53,9 @@ const router = new VueRouter({
   routes
 })
 
+
 router.beforeEach((to, from, next) => {
+
   const publicPages = ['/login', '/home'];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('userData');
@@ -62,6 +65,15 @@ router.beforeEach((to, from, next) => {
     next('/login');
   } else {
     next();
+  }
+});
+
+axios.interceptors.response.use(undefined, function (error) {
+            
+  if (error.response.status === 401) {
+    console.log("ok")
+          
+    return false
   }
 });
 

@@ -1,7 +1,7 @@
 <template>
     <section>
        <BreadCrumb breadCrumbProps="Liste des recettes"/>
-            <div class="latest-news mt-150 mb-150">
+            <div v-if="this.recipes" class="latest-news mt-150 mb-150">
               <div class="container">
                 <RecipeTypeList 
                   v-on:recipe-typeId-selected="handleRecipeTypeSelected"
@@ -35,16 +35,22 @@ export default {
     },
 
     async created() {
-      if(!userService.isAuthenticated() ) {
+
+
+      this.preRecipe = await RecipeService.loadRecipes()
+
+      if(!userService.isAuthenticated() || this.preRecipe == false) {
           this.$store.dispatch('auth/logout');
           this.$router.push('/login');
       } else {
-        this.recipes = await RecipeService.loadRecipes()
+        this.recipes = this.preRecipe.data.result
       }
+
     },
 
     data() {
       return {
+        preRecipe: null,
         recipes: []
       }
     },

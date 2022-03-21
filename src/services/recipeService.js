@@ -5,7 +5,7 @@ const recipeService = {
     async loadRecipes() {
         const response = await axios.get('/recipe' )
 
-        return response.data.result;
+        return response;
     },
 
     async loadOneRecipe(recipeId) {
