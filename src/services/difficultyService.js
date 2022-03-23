@@ -3,9 +3,13 @@ import axios from "axios";
 const difficultyService = {
 
     async loadDifficulties() {
-        const response = await axios.get('/difficulty' )
-
-        return response.data.result;
+        return await axios.get('/difficulty' )
+                .then(response => {
+                    return response.data.result;
+                })
+                .catch(err => {
+                    return err
+                })
     }
 
 }

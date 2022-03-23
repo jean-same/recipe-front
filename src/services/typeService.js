@@ -3,9 +3,13 @@ import axios from "axios";
 const typeService = {
 
     async loadTypes() {
-        const response = await axios.get('/type' )
-
-        return response.data.result;
+        return await axios.get('/type' )
+                .then(response => {
+                    return response.data.result;
+                })
+                .catch(err => {
+                    return err
+                })
     }
 
 }
