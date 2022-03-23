@@ -3,34 +3,55 @@ import axios from "axios";
 const recipeService = {
 
     async loadRecipes() {
-        const response = await axios.get('/recipe' )
+        return await axios.get('/recipe')
+                .then(response => {
+                    return response;
+                })
+                .catch(err => {
+                    return err
+                })
 
-        return response;
     },
 
     async loadOneRecipe(recipeId) {
-        const response = await axios.get('/recipe/' + recipeId )
-
-        return response.data.result;
+        return await axios.get('/recipe/' + recipeId )
+                .then(response => {
+                    return response.data.result;
+                })
+                .catch(err => {
+                    return err
+                })
     },
 
     async loadRecipesByType(typeId) {
-        const response = await axios.get('/type/' + typeId )
+        return await axios.get('/type/' + typeId )
+                .then(response => {
+                    return response.data.result.recipes;
+                })
+                .catch(err => {
+                    return err
+                })
 
-        return response.data.result.recipes;
     },
 
     async loadFiveSpecificRecipes(arg) {
-        const response = await axios.get('/recipe/spec?q=' + arg )
-
-        return response.data.result;
+        return await axios.get('/recipe/spec?q=' + arg )
+                .then(response => {
+                    return response.data.result;
+                })
+                .catch(err => {
+                    return err
+                })
     },
 
     async addRecipe(data) {
-        const response = await axios.post('/recipe/' , data )
-
-        return response
-
+        return await axios.post('/recipe/' , data )
+                .then(response => {
+                    return response
+                })
+                .catch(err => {
+                    return err
+                })
     }
 
 }
