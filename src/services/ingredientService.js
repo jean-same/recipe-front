@@ -2,7 +2,7 @@ import axios from "axios";
 
 const ingredientService = {
 
-    async loadDifficulties() {
+    async loadIngredients() {
         const response = await axios.get('/ingredient' )
 
         return response.data.result;
