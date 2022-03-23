@@ -114,16 +114,18 @@ export default {
     },
 
     created() {
-      
-      if(userService.isAuthenticated()) {
+
+      console.log(userService.checkUserRole())
+
+      if(userService.isAuthenticated() && userService.checkUserRole()) {
           this.isConnected = true
           this.loadTypes()
           this.loadIngredients()
           this.loadDifficulties()
           
       } else {
-          this.$store.dispatch('auth/logout');
-          this.$router.push('/login');
+          alertService.alertSomethingWentWrong("Vous n'êtes pas autorisé à ajouter des recettes")
+          this.$router.push('/recettes');
       }
 
     },

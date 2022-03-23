@@ -21,14 +21,21 @@ const userService = {
         return false;
     },
 
-    checkToken: () => {
+    checkUserRole: () => {
       
         if (storage.get('userData')) {
-            const { exp: expiration } = jwtDecode(storage.get('userData').token);
+            const { exp: expiration, roles } = jwtDecode(storage.get('userData').token);
           if (expiration * 1000 > new Date().getTime()) {
-            console.log("ok")
-          }
+
+            if(roles.includes('ROLE_CONTRIBUTOR') || roles.includes('ROLE_CHIEF') || roles.includes('ROLE_ADMIN')) {
+              return true
+            }
+
+          } 
+          
         }
+
+        return false
       },
 
 }

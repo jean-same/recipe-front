@@ -77,9 +77,7 @@ router.beforeEach((to, from, next) => {
 
 axios.interceptors.response.use(undefined, function (error) {
             
-  if (error.response.status === 401) {
-    console.log("ok")
-          
+  if (error.response.status === 401) {          
     return false
   }
 });

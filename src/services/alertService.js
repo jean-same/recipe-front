@@ -12,6 +12,14 @@ const alertService = {
         })
     },
 
+    alertSomethingWentWrong : (message) => {
+        return Vue.swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: message,
+        })
+    },
+
 }
 
 export default alertService;
