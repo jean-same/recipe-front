@@ -2,7 +2,7 @@
      <div>
             <div class="radio-group">
                 <span
-                 v-for="type in this.types.result" 
+                 v-for="type in this.types" 
                  :key="type.id" 
                 >
                 <input type="radio" v-bind:id="`option${type.id}`" v-model="selectedOption" :value="type.id" name="selector" v-on:change="handleSelectedType">
@@ -23,7 +23,7 @@ export default {
     async created() {
       this.preTypes = await typeService.loadTypes()
       if(userService.isAuthenticated() || this.preTypes) {
-          this.types = this.preTypes.data
+          this.types = this.preTypes
       }
     },
 

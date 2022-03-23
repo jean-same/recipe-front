@@ -25,6 +25,13 @@ const routes = [
     component: () => import('../components/RecipeShow.vue')
   },
 
+
+  {
+    path: '/nouveau-recette',
+    name: 'recipeCreate',
+    component: () => import('../views/RecipeCreateView.vue')
+  },
+
   {
     path: '/login',
     name: 'login',
