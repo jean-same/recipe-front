@@ -102,6 +102,7 @@ import BreadCrumb from './BreadCrumb.vue'
 import recipeService from '../services/recipeService'
 import typeService from '../services/typeService'
 import userService from '../services/userService'
+import alertService from '../services/alertService'
 import ingredientService from '../services/ingredientService'
 import difficultyService from '../services/difficultyService'
 
@@ -174,6 +175,7 @@ export default {
                 const add = await recipeService.addRecipe(data)
                 console.log(add)
                 if(add.status == 201) {
+                    alertService.alertSuccess("Recette ajoutée")
                     this.$router.push('/recettes')
                 }
             }

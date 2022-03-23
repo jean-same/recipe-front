@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
-import store from './store';
-import VeeValidate from 'vee-validate';
+import store from './store'
+import VeeValidate from 'vee-validate'
+import VueSweetalert2 from 'vue-sweetalert2'
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
@@ -9,10 +10,15 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import 'sweetalert2/dist/sweetalert2.min.css'
+
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
-Vue.use(VeeValidate);
+Vue.use(VeeValidate)
+
+
+Vue.use(VueSweetalert2)
 
 import './assets/css/main.css'
 import router from './plugins/router'
