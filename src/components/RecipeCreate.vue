@@ -86,7 +86,7 @@
                                         class="empty-field"
                                         role="alert"
                                     >Description obligatoire!</div>
-                                    <p><input :class="{ 'submit-disabled' : errors.has('title') || errors.has('content') }" type="submit" value="Ajouter"></p>
+                                    <p><input :class="{ 'submit-disabled' : emptyTitle || emptyType || emptyDifficulty || emptyIngredient || emptyContent }" type="submit" value="Ajouter"></p>
                                 </form>
                             </div>
                         </div>
@@ -99,6 +99,7 @@
 <script>
 
 import BreadCrumb from './BreadCrumb.vue'
+import recipeService from '../services/recipeService'
 import typeService from '../services/typeService'
 import userService from '../services/userService'
 import ingredientService from '../services/ingredientService'
@@ -148,13 +149,34 @@ export default {
     },
 
     methods: {
-        handleSubmit() {
+        async handleSubmit() {
 
             this.title == '' ? this.emptyTitle = true : this.emptyTitle = false
             this.content == '' ? this.emptyContent = true : this.emptyContent = false
             this.selectedIngredients.length == 0 ? this.emptyIngredient = true : this.emptyIngredient = false
             this.selectedTypeOption == 'Choisir un type' ? this.emptyType = true : this.emptyType = false
             this.selectedDifficultyOption == 'Choisir une difficulté' ? this.emptyDifficulty = true : this.emptyDifficulty = false
+
+            if(!this.emptyTitle && !this.emptyContent && !this.emptyIngredient && !this.emptyType && !this.emptyDifficulty) {
+                let data = {
+                    "title": this.title,
+                    "content": this.content,
+                    "type": this.selectedTypeOption,
+                    "difficulty": this.selectedDifficultyOption,
+                    "ingredient" : this.selectedIngredients,
+                    "pictures": [
+                        {
+                            "url": "https://picsum.photos/id/431/350"
+                        }
+                    ]
+                }
+
+                const add = await recipeService.addRecipe(data)
+                console.log(add)
+                if(add.status == 201) {
+                    this.$router.push('/recettes')
+                }
+            }
             
         },
 
@@ -236,7 +258,7 @@ select {
     border-radius: 10px;
 }
 
-.submit-disabled {
+input[type="submit"] .submit-disabled {
     pointer-events: none;
     background: #ccc;
 }

@@ -26,6 +26,13 @@ const recipeService = {
         return response.data.result;
     },
 
+    async addRecipe(data) {
+        const response = await axios.post('/recipe/' , data )
+
+        return response
+
+    }
+
 }
 
 export default recipeService;
