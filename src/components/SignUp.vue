@@ -105,16 +105,22 @@ components: {
             if( !this.emptyPseudo && !this.emptyEmail && !this.emptyPassword && !this.emptyRole) {
                 let data = {
                     "pseudo": this.pseudo,
-                    "role" : this.role,
+                    "roles" : Array.of(this.role),
                     "email": this.email,
                     "password": this.password
-            }
+                }
 
-                const create = await userService.create(data)
-                if(create.status == 201) {
+                await userService.create(data)
+                .then(response => {
+                    if(response.status == 201) {
                     alertService.alertSuccess("Votre compte a été crée")
                     this.$router.push('/login')
                 }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+
             }
         }
   }
