@@ -1,7 +1,18 @@
+import axios from "axios";
 import jwtDecode from "jwt-decode";
 import storage from "@/plugins/storage";
 
 const userService = {
+
+    async create(data) {
+      return await axios.post('/user/' , data )
+      .then(response => {
+          return response
+      })
+      .catch(err => {
+          return err
+      })
+    },
 
     isAuthenticated: () => {
       

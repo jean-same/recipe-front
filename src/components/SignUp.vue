@@ -70,14 +70,14 @@ components: {
   },
 
     methods: {
-    handleSubmit() {
+        handleSubmit() {
 
-        this.pseudo == '' ? this.emptyPseudo = true : this.emptyPseudo = false
-        this.email == '' ? this.emptyEmail = true : this.emptyEmail = false
-        this.password == '' ? this.emptyPassword = true : this.emptyPassword = false
+            this.pseudo == '' ? this.emptyPseudo = true : this.emptyPseudo = false
+            this.email == '' ? this.emptyEmail = true : this.emptyEmail = false
+            this.password == '' ? this.emptyPassword = true : this.emptyPassword = false
+            
         
-    
-    }
+        }
   }
 }
 </script>
