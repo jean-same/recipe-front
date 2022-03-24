@@ -115,8 +115,6 @@ export default {
 
     created() {
 
-      console.log(userService.checkUserRole())
-
       if(userService.isAuthenticated() && userService.checkUserRole()) {
           this.isConnected = true
           this.loadTypes()

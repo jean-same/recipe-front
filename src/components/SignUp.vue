@@ -5,21 +5,42 @@
                 <div class="container">
                     <div class="row">
                         <div class="signup-form-container col-lg-6 mb-3 mb-lg-0">
-                            <div id="form_status">
-                                <span class="wrong"
-                                v-if="message"
-                                >Identifiants incorects! </span>
-                            </div>
                             <div class="signup-form">
                                 <form @submit.prevent="handleSubmit">
-                                    <p>
-                                        <input type="text" v-model="pseudo" v-validate="'required'" placeholder="Votre pseudo" name="pseudo" id="pseudo">
-                                    </p>
-                                    <div
-                                        v-if="emptyPseudo"
-                                        class="empty-field"
-                                        role="alert"
-                                    >Pseudo obligatoire!</div>
+
+                                    <div class="row">
+
+                                        <div class="type col-sm-6">
+                                            <p>
+                                                <input type="text" v-model="pseudo" v-validate="'required'" placeholder="Votre pseudo" name="pseudo" id="pseudo">
+                                            </p>
+                                            <div
+                                                v-if="emptyPseudo"
+                                                class="empty-field"
+                                                role="alert"
+                                            >Pseudo obligatoire!</div>
+                                        </div>
+
+
+                                        <div class="role col-sm-6">
+                                            <select class="form-select" v-model="role"  >
+                                                <option selected>Choisir un role</option>
+                                                <option value="ROLE_CHIEF">Cuisinier</option>
+                                                <option value="ROLE_CONTRIBUTOR">Contributeur</option>
+                                            </select>
+                                            <div
+                                            v-if="emptyRole"
+                                            class="empty-field"
+                                            role="alert"
+                                            >
+                                            Role obligatoire!
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
                                     <p>
                                         <input type="email" v-model="email" v-validate="'required'" placeholder="Votre adresse email" name="email" id="email">
                                     </p>
@@ -47,6 +68,9 @@
 </template>
 
 <script>
+import userService from '@/services/userService'
+import alertService from '../services/alertService'
+
 
 import BreadCrumb from './BreadCrumb.vue'
 
@@ -65,18 +89,33 @@ components: {
       emptyPseudo: false,
       password: '',
       emptyPassword: false,
-      message: ''
+      role: [],
+      emptyRole: false
     };
   },
 
     methods: {
-        handleSubmit() {
+       async handleSubmit() {
 
             this.pseudo == '' ? this.emptyPseudo = true : this.emptyPseudo = false
+            this.role == '' ? this.emptyRole = true : this.emptyRole = false
             this.email == '' ? this.emptyEmail = true : this.emptyEmail = false
             this.password == '' ? this.emptyPassword = true : this.emptyPassword = false
-            
-        
+
+            if( !this.emptyPseudo && !this.emptyEmail && !this.emptyPassword && !this.emptyRole) {
+                let data = {
+                    "pseudo": this.pseudo,
+                    "role" : this.role,
+                    "email": this.email,
+                    "password": this.password
+            }
+
+                const create = await userService.create(data)
+                if(create.status == 201) {
+                    alertService.alertSuccess("Votre compte a été crée")
+                    this.$router.push('/login')
+                }
+            }
         }
   }
 }

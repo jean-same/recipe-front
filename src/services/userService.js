@@ -5,7 +5,7 @@ import storage from "@/plugins/storage";
 const userService = {
 
     async create(data) {
-      return await axios.post('/user/' , data )
+      return await axios.post('/user' , data )
       .then(response => {
           return response
       })
