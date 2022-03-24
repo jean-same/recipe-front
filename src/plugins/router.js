@@ -39,6 +39,12 @@ const routes = [
   },
 
   {
+    path: '/inscription',
+    name: 'inscription',
+    component: () => import('../views/SignUpView.vue')
+  },
+
+  {
     path: '/logout',
     name: 'logout',
     component: () => import('../views/LogoutView.vue')
@@ -63,7 +69,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
 
-  const publicPages = ['/login', '/home'];
+  const publicPages = ['/login', '/home','/inscription'];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('userData');
   // trying to access a restricted page + not logged in
