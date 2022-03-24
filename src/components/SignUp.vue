@@ -19,7 +19,7 @@
                                         v-if="emptyPseudo"
                                         class="empty-field"
                                         role="alert"
-                                    >Email obligatoire!</div>
+                                    >Pseudo obligatoire!</div>
                                     <p>
                                         <input type="email" v-model="email" v-validate="'required'" placeholder="Votre adresse email" name="email" id="email">
                                     </p>
@@ -69,8 +69,15 @@ components: {
     };
   },
 
-  props: {
-    msg: String
+    methods: {
+    handleSubmit() {
+
+        this.pseudo == '' ? this.emptyPseudo = true : this.emptyPseudo = false
+        this.email == '' ? this.emptyEmail = true : this.emptyEmail = false
+        this.password == '' ? this.emptyPassword = true : this.emptyPassword = false
+        
+    
+    }
   }
 }
 </script>
