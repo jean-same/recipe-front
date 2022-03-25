@@ -36,14 +36,7 @@
                                 </div>
                             </div>
 
-                            <div class="comment-template">
-                                <h4>Laisser un commentaire</h4>
-                                <p>Si vous avez un commentaire n'hésitez pas à nous envoyer votre avis.</p>
-                                <form action="index.html">
-                                    <p><textarea name="comment" id="comment" cols="30" rows="10" placeholder="Votre message"></textarea></p>
-                                    <p><input type="submit" value="Submit"></p>
-                                </form>
-                            </div>
+                            <CommentCreate :idCommentRecipeProps="recipe.id" /> 
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -77,6 +70,7 @@
 import BreadCrumb from './BreadCrumb.vue'
 import MostLikedRecipe from './MostLikedRecipe.vue'
 import MostRecentRecipe from './MostRecentRecipe.vue'
+import CommentCreate from './CommentCreate.vue'
 
 
 import utils from '../services/utils';
@@ -88,7 +82,8 @@ export default {
     components: {
         BreadCrumb,
         MostLikedRecipe,
-        MostRecentRecipe
+        MostRecentRecipe,
+        CommentCreate
     },
 
     data(){
@@ -101,7 +96,7 @@ export default {
     methods: {
         getCommentFormattedDate: function(date) {
             return utils.formatDate(date)
-        }
+        },
     },
 
     computed: {
@@ -123,7 +118,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 
 .single-recipe-bg {
   background-size: cover;
