@@ -10,12 +10,12 @@ class AuthService {
         password: user.password
       })
       .then(response => {
+        console.log(response)
+        if (response.data.token) {
           window.localStorage.setItem('userData', JSON.stringify(response.data));
           axiosDefaultService.setHeader(response.data.token)
+        }
         return response.data;
-      })
-      .catch(err => {
-        console.log(err)
       })
   }
   logout() {
