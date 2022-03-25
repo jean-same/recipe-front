@@ -20,6 +20,13 @@ const routes = [
   },
 
   {
+    path: '/mes-recettes',
+    name: 'myRecipes',
+    component: () => import('../views/MyRecipesView.vue')
+  },
+
+
+  {
     path: '/recette/:id',
     name: 'recipeShow',
     component: () => import('../components/RecipeShow.vue')

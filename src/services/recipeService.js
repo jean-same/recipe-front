@@ -13,6 +13,17 @@ const recipeService = {
 
     },
 
+    async loadMyRecipes() {
+        return await axios.get('/recipe/my-recipes')
+                .then(response => {
+                    return response;
+                })
+                .catch(err => {
+                    return err
+                })
+
+    },
+
     async loadOneRecipe(recipeId) {
         return await axios.get('/recipe/' + recipeId )
                 .then(response => {
