@@ -14,10 +14,13 @@ body {
   letter-spacing: 0.1px;
   color: #051922;
   overflow-x: hidden;
+  height:100%;
 }
 
-body img {
-  max-width: 100%;
+#app {
+  min-height:100%;
+  position:relative;
+  padding-bottom: 180px;
 }
 
 a {
