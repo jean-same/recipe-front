@@ -99,12 +99,6 @@
 <script>
 
 import BreadCrumb from './BreadCrumb.vue'
-import recipeService from '../services/recipeService'
-import typeService from '../services/typeService'
-import userService from '../services/userService'
-import alertService from '../services/alertService'
-import ingredientService from '../services/ingredientService'
-import difficultyService from '../services/difficultyService'
 
 export default {
     name: 'RecipeCreate',
@@ -115,14 +109,14 @@ export default {
 
     created() {
 
-      if(userService.isAuthenticated() && userService.checkUserRole()) {
+      if(this.$store.state.services.user.isAuthenticated() && this.$store.state.services.user.checkUserRole()) {
           this.isConnected = true
           this.loadTypes()
           this.loadIngredients()
           this.loadDifficulties()
           
       } else {
-          alertService.alertSomethingWentWrong("Vous n'êtes pas autorisé à ajouter des recettes")
+          this.$store.state.services.alert.alertSomethingWentWrong("Vous n'êtes pas autorisé à ajouter des recettes")
           this.$router.push('/recettes');
       }
 
@@ -172,10 +166,10 @@ export default {
                     ]
                 }
 
-                const add = await recipeService.addRecipe(data)
+                const add = await this.$store.state.services.recipe.addRecipe(data)
                 console.log(add)
                 if(add.status == 201) {
-                    alertService.alertSuccess("Recette ajoutée")
+                    this.$store.state.services.alert.alertSuccess("Recette ajoutée")
                     this.$router.push('/recettes')
                 }
             }
@@ -183,15 +177,15 @@ export default {
         },
 
         async loadTypes() {
-            this.types = await typeService.loadTypes()
+            this.types = await this.$store.state.services.type.loadTypes()
         },
 
         async loadIngredients() {
-            this.ingredients = await ingredientService.loadIngredients()
+            this.ingredients = await this.$store.state.services.ingredient.loadIngredients()
         },
 
         async loadDifficulties() {
-            this.difficulties = await difficultyService.loadDifficulties()
+            this.difficulties = await this.$store.state.services.difficulty.loadDifficulties()
         }
     }
 }

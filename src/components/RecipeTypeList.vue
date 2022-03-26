@@ -14,15 +14,13 @@
 </template>
 
 <script>
-import typeService from '../services/typeService'
-import userService from '../services/userService'
 
 export default {
     name: 'RecipeTypeList',
 
     async created() {
-      this.preTypes = await typeService.loadTypes()
-      if(userService.isAuthenticated() || this.preTypes) {
+      this.preTypes = await this.$store.state.services.type.loadTypes()
+      if(this.$store.state.services.user.isAuthenticated() || this.preTypes) {
           this.types = this.preTypes
       }
     },
@@ -37,7 +35,7 @@ export default {
 
     methods: {
         handleSelectedType: function(evt) {
-            evt.PreventDefault;
+            evt.preventDefault;
             this.$emit('recipe-typeId-selected' , this.selectedOption)
         }
     }

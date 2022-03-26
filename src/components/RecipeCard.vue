@@ -39,7 +39,6 @@
 import LikeButton from './secondaries/LikeButton.vue';
 import CommentButton from './secondaries/CommentButton.vue';
 import ShareButton from './secondaries/ShareButton.vue';
-import utils from '../services/utils';
 
 export default {
     name: 'RecipeCard',
@@ -52,7 +51,7 @@ export default {
 
     data() {
       return {
-        date: utils.formatDate(this.recipeProps.created_at)
+        date: this.$store.state.services.utils.formatDate(this.recipeProps.created_at)
       }
     },
 

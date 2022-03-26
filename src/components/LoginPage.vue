@@ -44,7 +44,6 @@
 
 import User from '../models/user';
 import BreadCrumb from './BreadCrumb.vue'
-import alertService from '../services/alertService'
 
 export default {
   name: 'LoginPage',
@@ -84,7 +83,7 @@ export default {
         if (this.user.email && this.user.password) {
           this.$store.dispatch('auth/login', this.user).then(
             () => {
-              alertService.alertSuccess('Connexion reussi')
+              this.$store.state.services.alert.alertSuccess('Connexion reussi')
               this.$router.push('/recettes');
             },
             error => {

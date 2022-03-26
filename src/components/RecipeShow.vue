@@ -72,10 +72,6 @@ import MostLikedRecipe from './MostLikedRecipe.vue'
 import MostRecentRecipe from './MostRecentRecipe.vue'
 import CommentCreate from './CommentCreate.vue'
 
-
-import utils from '../services/utils';
-import recipeService from '../services/recipeService'
-
 export default {
     name: 'RecipeShow',
 
@@ -90,18 +86,20 @@ export default {
         return {
             recipe: [],
             recipeId: null,
+            pic: null
         }
     },
 
     methods: {
         getCommentFormattedDate: function(date) {
-            return utils.formatDate(date)
+            return this.$store.state.services.utils.formatDate(date)
         },
+
     },
 
     computed: {
         getRecipeDateFormatted() {
-          return utils.formatDate(this.recipe.created_at)
+          return this.$store.state.services.utils.formatDate(this.recipe.created_at)
         },
 
         getPicture() {
@@ -111,7 +109,7 @@ export default {
 
     async created() {
         this.recipeId = this.$route.params.id;
-        this.recipe = await recipeService.loadOneRecipe(this.recipeId)
+        this.recipe = await this.$store.state.services.recipe.loadOneRecipe(this.recipeId)
     },
 
 }

@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import recipeService from '../services/recipeService'
 
 export default {
     name: 'MostLikedRecipe',
@@ -20,7 +19,7 @@ export default {
     },
 
     async created() {
-        this.recipes = await recipeService.loadFiveSpecificRecipes('ml');
+        this.recipes = await this.$store.state.services.recipe.loadFiveSpecificRecipes('ml');
     },
 
 }

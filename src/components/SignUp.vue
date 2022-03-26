@@ -69,9 +69,6 @@
 </template>
 
 <script>
-import userService from '@/services/userService'
-import alertService from '../services/alertService'
-
 
 import BreadCrumb from './BreadCrumb.vue'
 
@@ -111,10 +108,10 @@ components: {
                     "password": this.password
                 }
 
-                await userService.create(data)
+                await this.$store.state.services.user.create(data)
                 .then(response => {
                     if(response.status == 201) {
-                    alertService.alertSuccess("Votre compte a été crée")
+                    this.$store.state.services.alert.alertSuccess("Votre compte a été crée")
                     this.$router.push('/login')
                 }
                 })

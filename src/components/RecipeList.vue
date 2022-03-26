@@ -21,10 +21,7 @@
 <script>
 import RecipeCard from './RecipeCard.vue'
 import BreadCrumb from './BreadCrumb.vue'
-import RecipeService from '../services/recipeService.js'
 import RecipeTypeList from './RecipeTypeList.vue'
-import recipeService from '../services/recipeService.js'
-import userService from '../services/userService'
 
 export default {
     name: "RecipeList",
@@ -37,9 +34,9 @@ export default {
     async created() {
 
 
-      this.preRecipe = await RecipeService.loadRecipes()
+      this.preRecipe = await this.$store.state.services.recipe.loadRecipes()
 
-      if(!userService.isAuthenticated() || this.preRecipe == false) {
+      if(!this.$store.state.services.user.isAuthenticated() || this.preRecipe == false) {
           this.$store.dispatch('auth/logout');
           this.$router.push('/login');
       } else {
@@ -58,11 +55,11 @@ export default {
     methods: {
       
       handleRecipeTypeSelected: async function(selectedOptionId) {
-        if(!userService.isAuthenticated() ) {
+        if(!this.$store.state.services.user.isAuthenticated() ) {
             this.$store.dispatch('auth/logout');
             this.$router.push('/login');
         } else {
-              this.recipes = await recipeService.loadRecipesByType(selectedOptionId);
+              this.recipes = await this.$store.state.services.recipe.loadRecipesByType(selectedOptionId);
         }
       }
     },
