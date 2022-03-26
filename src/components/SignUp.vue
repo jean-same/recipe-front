@@ -8,7 +8,7 @@
                             <div class="signup-form">
                                 <form @submit.prevent="handleSubmit">
 
-                                    <div class="row">
+                                    <div class="row mb-3">
 
                                         <div class="type col-sm-6">
                                             <p>
@@ -23,7 +23,7 @@
 
 
                                         <div class="role col-sm-6">
-                                            <select class="form-select" v-model="role"  >
+                                            <select class="form-select" v-model="selectedRole"  >
                                                 <option selected>Choisir un role</option>
                                                 <option value="ROLE_CHIEF">Cuisinier</option>
                                                 <option value="ROLE_CONTRIBUTOR">Contributeur</option>
@@ -90,8 +90,8 @@ components: {
       emptyPseudo: false,
       password: '',
       emptyPassword: false,
-      role: [],
-      emptyRole: false
+      emptyRole: false,
+      selectedRole: 'Choisir un role'
     };
   },
 
@@ -99,14 +99,14 @@ components: {
        async handleSubmit() {
 
             this.pseudo == '' ? this.emptyPseudo = true : this.emptyPseudo = false
-            this.role == '' ? this.emptyRole = true : this.emptyRole = false
+            this.selectedRole == 'Choisir un role' ? this.emptyRole = true : this.emptyRole = false
             this.email == '' ? this.emptyEmail = true : this.emptyEmail = false
             this.password == '' ? this.emptyPassword = true : this.emptyPassword = false
 
             if( !this.emptyPseudo && !this.emptyEmail && !this.emptyPassword && !this.emptyRole) {
                 let data = {
                     "pseudo": this.pseudo,
-                    "roles" : Array.of(this.role),
+                    "roles" : Array.of(this.selectedRole),
                     "email": this.email,
                     "password": this.password
                 }
@@ -136,7 +136,7 @@ components: {
     margin: 0 auto;
 }
 
-.signup-form form p input[type=text] ,.signup-form form p input[type=password], .signup-form form p input[type=email] {
+.signup-form form p input[type=text] ,.signup-form form p input[type=password], .signup-form form p input[type=email], select {
   width: 100%;
   padding: 15px;
   border: 1px solid #ddd;
