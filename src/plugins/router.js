@@ -3,6 +3,7 @@ import axios from 'axios';
 import VueRouter from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
+import NotFoundView from '../views/NotFoundView.vue';
 
 Vue.use(VueRouter)
 
@@ -55,6 +56,12 @@ const routes = [
     path: '/logout',
     name: 'logout',
     component: () => import('../views/LogoutView.vue')
+  },
+
+  {
+    path: '*',
+    name: 'Not Found',
+    component: NotFoundView
   },
 
   {
