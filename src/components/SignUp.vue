@@ -57,6 +57,7 @@
                                         class="empty-field"
                                         role="alert"
                                     >Mot de passe obligatoire!</div>
+                                    <p class="text-center">Vous avez déjà un compte? <router-link to="/login">Connectez-vous</router-link> </p>
                                     <p><input :class="{ 'submit-disabled' : emptyPseudo || emptyEmail || emptyPassword }" type="submit" value="S'inscrire"></p>
                                 </form>
                             </div>

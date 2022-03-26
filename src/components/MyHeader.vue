@@ -34,7 +34,7 @@
                 </li>
 								<li>
 										<a class="nav-link" v-if="currentUser"  @click.prevent="logOut"> Deconnexion </a>
-                    <span v-if="!currentUser"><router-link to="/login">Connexion </router-link></span>
+                    <span v-if="!currentUser"><router-link to="/login">Connexion </router-link> <span class="text-white">ou</span> <router-link to="/inscription">Inscription </router-link></span>
 								</li>
 							</ul>
 						</nav>
